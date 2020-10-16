@@ -75,7 +75,7 @@ OpenCV provee una interfaz muy simple a la hora de trabajar con videos desde Pyt
 ### Captura de Videos con tu cámara
 Para capturar video desde una cámara, OpenCV provee la clase `cv2.VideoCapture()`, la cual recibe un parámetro único, ques es un `int` que indica a cuál cámara debe conectarse. La cámara por *default* del equipo (si es que tiene una) tiene asignado el número 0, y las siguientes opciones continuan con 1, 2, 3, etc. Los objetos pertenecientes a esta clase tienen el método `read()`, el cual no recibe parámteros, y retorna a lo que nos referiremos como `ret` y `frame`, donde `ret` es `True` si la cámara captó algo o `False` si no captó nada, y `frame` es la imagen capturada por la cámara.
 
-Con esto, y lo visto en la [sección anterior](#Images), ya podemos capturar nuestro propio video:
+Con esto, y lo visto en la [sección anterior](#Imagenes), ya podemos capturar nuestro propio video:
 ```python3
 import numpy as np
 import cv2
