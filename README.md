@@ -103,6 +103,31 @@ cv2.destroyAllWindows()
 
 
 ### Abre un video de tu librería
+Para abrir un video guardado en la librería, el codigo es bastante similar. Solo debes cambiar el parámetro que recibe `cv2.VideoCature()`, entregando el onmbre del archivo, o el path que lleva a este.
+
+```python3
+import numpy as np
+import cv2
+
+# Instanciamos el video
+cap = cv2.VideoCapture('videoExample.mp4')
+
+# Verificamos que el video este inicializado o lo inicializamos
+if cap.isOpened():
+	cap.open(nCam)
+
+# Capturamos el video cuadro por cuadro
+while(cap.isOpened()):
+	ret, frame = cap.read()
+	cv2.imshow('frame1',frame)
+	
+	if cv2.waitKey(1) & 0xFF == 27:
+		break
+
+# Cerramos el video y las Ventanas abiertas
+cap.release()
+cv2.destroyAllWindows()
+```
 
 ### Guarda los videos
 
