@@ -1,6 +1,7 @@
 # OpenCV-Python:computer: :eyes:
 
 Si quieres aprender a usar **OpenCV** con **Python** en español, creo que este es un buen lugar lara empezar. Solo necesitas tener conocimientos básicos de Python3, y tener instalado `Python 3`,`NumPy` y `OpenCV`.
+###### Ejemplos y contenidos absolutamente basados en [este sitio](https://opencv-python-tutroals.readthedocs.io/en/latest/index.html)
 
 ## Contenidos
 * [OpenCV](#OpenCv)
@@ -64,3 +65,4 @@ cv2.imwrite('grayscaleImage.jpg', img) # Guarda la imagen en escala de grises
 ###### Si quieres leer más sobre esto, haz click [aquí](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_image_display/py_image_display.html)
 
 ## Videos
+
