@@ -32,12 +32,14 @@ Aunque estas opciones se pueden reemplazar por `1`,`0` o `-1` respectivamente, p
 import numpy as np
 import cv2
 
-img = cv2.image("image.jpg", cv2.IMREAD_GRAYSCALE) # Lee la imagen en escala de grises
+# Lee la imagen en escala de grises
+img = cv2.image("image.jpg", cv2.IMREAD_GRAYSCALE)
 ```
 ### Mostrar una imagen
 Ahora que ya tenemos la imagen cargada, queremos poder mostrarla en pantalla. Para eso, utilizamos el comando `cv2.imshow()`, el cual tambien recibe dos parámetros. El primero es un string con el nombre de la ventana, y el segundo es la imagen ya cargada con `cv2.imread()`. Siguiendo con el código anterior, nuestro ejemplo se vería de la siguiente forma:
 ```python3
-cv2.imshow("frame1", img) # Abre la ventana con la imagen
+# Abre la ventana con la imagen
+cv2.imshow("frame1", img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
@@ -54,15 +56,53 @@ Si juntamos todo lo anterior, tenemos lo siguiente:
 import numpy as np
 import cv2
 
-img = cv2.image("image.jpg", cv2.IMREAD_GRAYSCALE) # Lee la imagen en escala de grises
+# Lee la imagen en escala de grises
+img = cv2.image("image.jpg", cv2.IMREAD_GRAYSCALE)
 
-cv2.imshow("frame1", img) # Abre la ventana con la imagen, y la cierra al presionar una tecla
+# Abre la ventana con la imagen, y la cierra al presionar una tecla
+cv2.imshow("frame1", img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-cv2.imwrite('grayscaleImage.jpg', img) # Guarda la imagen en escala de grises
+# Guarda la imagen en escala de grises
+cv2.imwrite('grayscaleImage.jpg', img)
 ```
 ###### Si quieres leer más sobre esto, haz click [aquí](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_image_display/py_image_display.html)
 
 ## Videos
+OpenCV provee una interfaz muy simple a la hora de trabajar con videos desde Python, por lo que una implementación para capturar tu propio video, o trabajar con un archivo existente, no es muy compleja.
+
+### Captura de Videos con tu cámara
+Para capturar video desde una cámara, OpenCV provee la clase `cv2.VideoCapture()`, la cual recibe un parámetro único, ques es un `int` que indica a cuál cámara debe conectarse. La cámara por *default* del equipo (si es que tiene una) tiene asignado el número 0, y las siguientes opciones continuan con 1, 2, 3, etc. Los objetos pertenecientes a esta clase tienen el método `read()`, el cual no recibe parámteros, y retorna a lo que nos referiremos como `ret` y `frame`, donde `ret` es `True` si la cámara captó algo o `False` si no captó nada, y `frame` es la imagen capturada por la cámara.
+
+Con esto, y lo visto en la [sección anterior](#Images), ya podemos capturar nuestro propio video:
+```python3
+import numpy as np
+import cv2
+
+# Instanciamos la camara
+nCam = 0
+cap = cv2.VideoCapture(nCam)
+
+# Verificamos que la camara este inicializada o la inicializamos
+if cap.isOpened():
+	cap.open(nCam)
+
+# Capturamos el video cuadro por cuadro
+while(True):
+	ret, frame = cap.read()
+	cv2.imshow('frame1',frame)
+	
+	if cv2.waitKey(1) & 0xFF == 27:
+		break
+
+# Cerramos la camara y las Ventanas abiertas
+cap.release()
+cv2.destroyAllWindows()
+```
+
+
+### Abre un video de tu librería
+
+### Guarda los videos
 
