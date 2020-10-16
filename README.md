@@ -103,7 +103,7 @@ cv2.destroyAllWindows()
 
 
 ### Abre un video de tu librería
-Para abrir un video guardado en la librería, el codigo es bastante similar. Solo debes cambiar el parámetro que recibe `cv2.VideoCature()`, entregando el onmbre del archivo, o el path que lleva a este.
+Para abrir un video guardado en la librería, el codigo es bastante similar. Solo debes cambiar el parámetro que recibe `cv2.VideoCature()`, entregando el nombre del archivo, o el path que lleva a este.
 
 ```python3
 import numpy as np
