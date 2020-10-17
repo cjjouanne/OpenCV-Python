@@ -1,7 +1,7 @@
 # OpenCV-Python:computer: :eyes:
 
-Si quieres aprender a usar **OpenCV** con **Python** en español, creo que este es un buen lugar lara empezar. Solo necesitas tener conocimientos básicos de 
-Python3, y tener instalado `Python 3`,`NumPy` y `OpenCV`.
+Si quieres aprender a usar **OpenCV** con **Python** en español, creo que este es un buen lugar para empezar. Solo necesitas tener conocimientos básicos de 
+Python 3, y tener instalado `Python 3`,`NumPy` y `OpenCV`.
 ###### Ejemplos y contenidos absolutamente basados en [este sitio](https://opencv-python-tutroals.readthedocs.io/en/latest/index.html)
 ## Contenidos
 * [OpenCV](#OpenCv)
