@@ -7,6 +7,7 @@ Si quieres aprender a usar **OpenCV** con **Python** en español, creo que este 
 * [Empezemos](#Empezemos)
   * [Imágenes](#Imagenes)
   * [Videos](#Videos)
+  * [Funciones de Dibujo](#Funciones de Dibujo)
 
 ## OpenCV
 OpenCV se inició en Intel en 1999 por Gary Bradsky y la primera versión salió en 2000. En este momento, OpenCV admite muchos algoritmos relacionados con la visión por computadora y el aprendizaje automático y se está expandiendo día a día. Actualmente, OpenCV admite una amplia variedad de lenguajes de programación como `C++`, `Python`, `Java`, etc. y está disponible en diferentes plataformas, incluidas **Windows**, **Linux**, **OS X**, **Android**, **iOS**, etc. Además, las interfaces basadas en `CUDA` y `OpenCL` también están en desarrollo activo para operaciones de alta velocidad de las la GPU.
@@ -164,3 +165,4 @@ cap.release()
 out.release()
 cv2.destroyAllWindows()
 ```
+## Funciones de Dibujo
