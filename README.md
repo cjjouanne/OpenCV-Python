@@ -242,4 +242,36 @@ while True:
 cv2.destroyAllWindows()
 ```
 ## Trackbars
+Una herramienta que nos será de gran utilidad a la hora de manejar parámetros y variables mientras ejecutamos nuestro programa son los **trackbars** ya que OpenCV no cuenta con ningún otro tipo de botón. Para insertar un trackbar en nuestro código, debemos llamar a la funcion `cv2.createTrackbar()` la cual recibe cinco parámetros. El primero es un string con el nombre del trackbar (ej: `'Trackbar1'`), el segundo corresponde al nombre de la ventana en la cual se quieren insertar, el tercero y cuarto corresponden al valor mínimo y máximo respectivamente, y el quinto corresponde a la función que se llamará cada vez que este cambie de valor, función a la cual se le entrega en nuevo valor del trackbar. Además, para obtener el valor de un trackbar, podemos utilizar `cv2.getTrackbarPos()` que recibe el nombre y el nombre de la ventana en la cual se encuentra correspondientes a un trackbar, y retorna su valor actual.
+```python3
+import cv2
+import numpy as np
 
+def on_trackbar(val):
+  print val:
+  
+# Crea a una imagen negra, y una ventana llamada 'frame'
+img = np.zeros((300,512,3), np.uint8)
+cv2.namedWindow('frame')
+
+# Crea tres trackbar en frame, llamados R,G,B, que van de 0 a 255 y llaman a on_trackbar()
+cv2.createTrackbar('R','frame',0,255,on_trackbar)
+cv2.createTrackbar('G','frame',0,255,on_trackbar)
+cv2.createTrackbar('B','frame',0,255,on_trackbar)
+
+while(True):
+    cv2.imshow('frame',img)
+    k = cv2.waitKey(1) & 0xFF
+    if k == 27:
+        break
+
+    # Obtiene las posiciones de los trackbars
+    r = cv2.getTrackbarPos('R','frame')
+    g = cv2.getTrackbarPos('G','frame')
+    b = cv2.getTrackbarPos('B','frame')
+
+    img[:] = [b,g,r]
+
+cv2.destroyAllWindows()
+```
+Este ejemplo nos permite manipular colores **RGB** en nuestra ventana e imprime el valor de la respectiva variable cada vez que esta cambia.
