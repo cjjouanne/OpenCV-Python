@@ -11,6 +11,10 @@ Python 3, y tener instalado `Python 3`,`NumPy` y `OpenCV`.
   * [Funciones de Dibujo](#Funciones-de-Dibujo)
   * [Utilizando el Mouse](#Utilizando-el-Mouse)
   * [Trackbars](#Trackbars)
+* [Operaciones y Procesamiento de Imágenes](#Operaciones-y-Procesamiento-de-Imágenes)
+  * [Operaciones Básicas](#Operaciones-Básicas)
+  * [Operaciones Matemáticas](#Operaciones-Matemáticas)
+  * [Procesos sobre Color](#Procesos-sobre-Color)
 
 ## OpenCV
 OpenCV se inició en Intel en 1999 por Gary Bradsky y la primera versión salió en 2000. En este momento, OpenCV admite muchos algoritmos relacionados con la visión 
@@ -275,3 +279,11 @@ while(True):
 cv2.destroyAllWindows()
 ```
 Este ejemplo nos permite manipular colores **RGB** en nuestra ventana e imprime el valor de la respectiva variable cada vez que esta cambia.
+### Operaciones y Procesamiento de Imágenes
+## Operaciones Básicas
+...
+## Operaciones Matemáticas
+...
+## Procesos sobre Color
+...
+
