@@ -281,7 +281,48 @@ cv2.destroyAllWindows()
 Este ejemplo nos permite manipular colores **RGB** en nuestra ventana e imprime el valor de la respectiva variable cada vez que esta cambia.
 ### Operaciones y Procesamiento de Imágenes
 ## Operaciones Básicas
-...
+En esta sección no se ven contenidos demasiado relevantes, y yo personalmente jámas los he usado, pero creo que pueden serle de utilidad a alguien.
+### Modificar Pixeles
+Para modificar un pixel en una imagen podemos hacerlo de varias formas. La primera es hacerlos direactamente:
+```python3
+import cv2
+mport numpy as np
+
+img = cv2.imread('testImage.jpg')
+
+# Podemos acceder al contenido de un pixel asi
+px = img[100,100]
+
+# Podemos acceder solo al canal B (BGR son 0,1,2 respectivamente) de ese pixel
+blue = img[100,100,0]
+
+# Podemos asignarle un valor BGR a un determinado pixel
+img[100,100] = [255,255,255]
+```
+Pero una manera más eficiente para acceder y modificar al contenido de un pixel es a través de `NumPy`, ya que este módulo está optimizado para operaciones matriciales:
+```python3
+# Acceder al canal R con array.item()
+red = img.item(10,10,2)
+
+# O modificar el canal R, con array.itemset()
+img.itemset((10,10,2),100)
+```
+### Acceder a las Propiedades de la Imagen
+Es posible acceder a las propiedades de una imagen através de comandos muy simples, y es posible que queramos usarlos:
+```python3
+# .shape nos retorna la cantidad de filas, columnas, y canales en un arragle
+shape = img.shape
+# >> (400, 600, 3)
+
+# .size nos retorna la cantidad de pixeles (la multiplicación de los parametros de shape)
+size = img.size
+# >> 720000
+
+# Con .dtype optenemos el tipo de datos de la imagen
+dtype = img.dtype
+# >> uint8 
+```
+
 ## Operaciones Matemáticas
 ...
 ## Procesos sobre Color
