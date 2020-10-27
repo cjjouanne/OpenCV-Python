@@ -283,7 +283,7 @@ Este ejemplo nos permite manipular colores **RGB** en nuestra ventana e imprime 
 ## Operaciones Básicas
 En esta sección no se ven contenidos demasiado relevantes, y yo personalmente jámas los he usado, pero creo que pueden serle de utilidad a alguien.
 ### Modificar Pixeles
-Para modificar un pixel en una imagen podemos hacerlo de varias formas. La primera es hacerlos direactamente:
+Para modificar un pixel en una imagen podemos hacerlo de varias formas. La primera es hacerlos directamente:
 ```python3
 import cv2
 mport numpy as np
@@ -310,7 +310,7 @@ img.itemset((10,10,2),100)
 ### Acceder a las Propiedades de la Imagen
 Es posible acceder a las propiedades de una imagen através de comandos muy simples, y es posible que queramos usarlos:
 ```python3
-# .shape nos retorna la cantidad de filas, columnas, y canales en un arragle
+# .shape nos retorna la cantidad de filas, columnas, y canales en un arreglo
 shape = img.shape
 # >> (400, 600, 3)
 
@@ -318,11 +318,19 @@ shape = img.shape
 size = img.size
 # >> 720000
 
-# Con .dtype optenemos el tipo de datos de la imagen
+# Con .dtype obtenemos el tipo de datos de la imagen
 dtype = img.dtype
 # >> uint8 
 ```
+### ROI
+Muchas veces vamos a querer modificar una región de la imagen en particular. Esto se usa en algoritmos de reconocimiento, como por ejemplo, para buscar los ojos, primero se buscan las caras, y luego en cada cara se buscan los ojos. Para hacer operaciones en la Región de Interés, o Region Of Interst (ROI), una vez que ya la tenemos identificada, lo hacemos a través del módulo `NumPy`
+```python3
+# Seleccionamos el contenido de la region de interes
+roi = img[280:340, 330:390]
 
+# Modificamos otra region, igualandola a nuestra roi
+img[273:333, 100:160] = roi
+```
 ## Operaciones Matemáticas
 ...
 ## Procesos sobre Color
