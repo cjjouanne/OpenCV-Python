@@ -17,10 +17,7 @@ Python 3, y tener instalado `Python 3`,`NumPy` y `OpenCV`.
   * [Procesos sobre Color](#Procesos-sobre-Color)
 
 ## OpenCV
-OpenCV se inició en Intel en 1999 por Gary Bradsky y la primera versión salió en 2000. En este momento, OpenCV admite muchos algoritmos relacionados con la visión 
-por computadora y el aprendizaje automático y se está expandiendo día a día. Actualmente, OpenCV admite una amplia variedad de lenguajes de programación como 
-`C++`, `Python`, `Java`, etc. y está disponible en diferentes plataformas, incluidas **Windows**, **Linux**, **OS X**, **Android**, **iOS**, etc. Además, las 
-interfaces basadas en `CUDA` y `OpenCL` también están en desarrollo activo para operaciones de alta velocidad de las la GPU.
+OpenCV es una librería de visión por computadora, la se inició en Intel el año 1999 por Gary Bradsky, y su primera versión salió el año 2000. En este momento, OpenCV admite muchos algoritmos relacionados con la visión por computadora y el aprendizaje automático y se está expandiendo día a día. Actualmente, OpenCV admite una amplia variedad de lenguajes de programación como `C++`, `Python`, `Java`, etc. y está disponible en diferentes plataformas, incluidas **Windows**, **Linux**, **OS X**, **Android**, **iOS**, etc. Además, las interfaces basadas en `CUDA` y `OpenCL` también están en desarrollo activo para operaciones de alta velocidad de la GPU.
 
 **OpenCV-Python** es la API de Python de OpenCV. Combina las mejores cualidades de la API `OpenCV C++` y el lenguaje `Python`.
 
@@ -331,8 +328,84 @@ roi = img[280:340, 330:390]
 # Modificamos otra region, igualandola a nuestra roi
 img[273:333, 100:160] = roi
 ```
+### Separar y Unir canales de una Imagen
+Una de las muchas posibilidades que nos ofrece OpenCV conciste es separar y unir los canales **BGR**(🔵🟢🔴) de una imagen cualquiera. Esto nos permite trabajar con cada canal por separado, y despues volver a unirlos una sola imagen. Para esto usamos las funciones `cv2.split()` y `cv2.merge()`, las cuales separan y unen los canales respectivamente.
+```python3
+# Almacena en las variable b,g,r los respectivos canales de la imagen
+b,g,r = cv2.split(img)
+
+# Une los canales b,g,r en una sola imagen
+img = cv2.merge((b,g,r))
+
+# Otra forma de obtener alguncanl de una imagen es con Numpy
+# Ej: obtener el canal B
+b = img[:,:,0]
+
+# Tambien podemos hacer operaciones sobre un canal
+# Como transformar todo el canal R a 0
+img[:,:,2] = 0
+```
+> Se puede agregar bordes a una imagen(_Padding_), pero no me pareció relevante incluirlo. De todas formas puedes aprender sobre esto [aquí](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_core/py_basic_ops/py_basic_ops.html#making-borders-for-images-padding)
 ## Operaciones Matemáticas
-...
+
+### cv2.add()
+Uno de los comandos para _sumar_ dos imágenes es `cv2.add` el cual recibe dos imágenes como parámetros, las cuales deben ser del mismo tamaño y estar en el mismo formato. Un ejemplo de esto sería así:
+```python3
+img1 = cv2.imread('image1.png')
+img2 = cv2.imread('image2.jpg')
+
+# Esta operación es necesaria si las imágenes son de tamaños distintos
+img1 = cv2.resize(img1, (480, 480))
+img2 = cv2.resize(img2, (480, 480))
+
+# Sumamos las imagenes
+new_image = cv2.add(img1, img2)
+
+cv2.imshow('new image',new_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+```
+
+### cv2.addWeighted()
+Este comando tambien nos sirve para _sumar_ imágenes, pero nos permite asignarle diferentes pesos a cada imagen, lo que otorga una sensación de transparencia.
+```python3
+img1 = cv2.imread('image1.png')
+img2 = cv2.imread('image2.jpg')
+
+# Esta operación es necesaria si las imágenes son de tamaños distintos
+img1 = cv2.resize(img1, (480, 480))
+img2 = cv2.resize(img2, (480, 480))
+
+# Sumamos las imagenes con peso 0.7 y .0.3
+new_image = cv2.add(img1, 0.7, img2, 0.3, 0)
+
+cv2.imshow('new image',new_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+### cv2.bitwise()
+Hay cuatro tipos de operaciones **_bitwise_**: **AND**, **OR**, **NOT** y **XOR**. Las operaciones `cv2.bitwise_and()`,`cv2.bitwise_or()`,`cv2.bitwise_xor()` reciben 4 parametros. Los primeros dos corresponden a las imágenes sobre las cuales se realiza la operación. El tercer parámetro `dest` viene con un valor default que no vamos a modificar por ahora. El cuarto parámetro `mask` corresponde a la máscara que se aplica en la operación, a la cual le podemos asignaner el valor `None`. Es difícil describir que hace cad una, por lo que recomiendo jugar con el codigo un rato.
+```python3
+img1 = cv2.imread('image1.jpg')  
+img2 = cv2.imread('image2.jpg')
+
+bitwise_and = cv2.bitwise_and(img2, img1, mask = None)
+
+cv2.imshow('bitwise and',bitwise_and)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+El el caso de `cv2.bitwise_not()`, esta operació recibe tres parámetros. El primero corresponde a la imagen sobre la cual se realiza la operación, El segundo parámetro, `dest`, viene con un valor default que no vamos a modificar por ahora. El tercer parámetro `mask` corresponde a la máscara que se aplica en la operación, a la cual le podemos asignaner el valor `None`.
+```python3
+img1 = cv2.imread('image1.jpg')
+
+bitwise_not = cv2.bitwise_not(img1, mask = None)
+
+cv2.imshow('bitwise not',bitwise_not)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
 ## Procesos sobre Color
 ...
 
