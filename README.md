@@ -2,7 +2,7 @@
 
 Si quieres aprender a usar **OpenCV** con **Python** en español, creo que este es un buen lugar para empezar. Solo necesitas tener conocimientos básicos de 
 Python 3, y tener instalado `Python 3`,`NumPy` y `OpenCV`.
-###### Ejemplos y contenidos absolutamente basados en [este sitio](https://opencv-python-tutroals.readthedocs.io/en/latest/index.html)
+> Ejemplos y contenidos absolutamente basados en [este sitio](https://opencv-python-tutroals.readthedocs.io/en/latest/index.html)
 ## Contenidos
 * [OpenCV](#OpenCv)
 * [Empezemos](#Empezemos)
@@ -329,7 +329,7 @@ roi = img[280:340, 330:390]
 img[273:333, 100:160] = roi
 ```
 ### Separar y Unir canales de una Imagen
-Una de las muchas posibilidades que nos ofrece OpenCV conciste es separar y unir los canales **BGR**(🔵🟢🔴) de una imagen cualquiera. Esto nos permite trabajar con cada canal por separado, y despues volver a unirlos una sola imagen. Para esto usamos las funciones `cv2.split()` y `cv2.merge()`, las cuales separan y unen los canales respectivamente.
+Una de las muchas posibilidades que nos ofrece OpenCV conciste es separar y unir los canales **BGR** de una imagen cualquiera. Esto nos permite trabajar con cada canal por separado, y despues volver a unirlos una sola imagen. Para esto usamos las funciones `cv2.split()` y `cv2.merge()`, las cuales separan y unen los canales respectivamente.
 ```python3
 # Almacena en las variable b,g,r los respectivos canales de la imagen
 b,g,r = cv2.split(img)
@@ -407,5 +407,74 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
 ## Procesos sobre Color
-...
+
+### Transformaciones de Color
+OpenCV nos permite transformar los colores de una imagen **_BGR_** a **_Escala de Grises_** o a **_HSV_**. Si bie existen muchas más transformaciones, y muchas otras maneras de hacerlo, la forma más comñun es a través de la función `cv2.cvtColor()` la cual recibe como primer parámetro una imagen en **_BGR_**, y como segungo parámetro un flag, el cual es `cv2.COLOR_BGR2GRAY` para transformar una imagen **_BGR_** a **_Escala deGrises_**, y es `cv2.COLOR_BGR2HSV` para tranformar una imagen de **_BGR_** a **_HSV_**.
+```python3
+img1 = cv2.imread('image1.jpg')
+
+hsv_frame = cv2.cvtColor(im1, cv2.COLOR_BGR2HSV)
+grey_frame = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
+
+cv2.imshow('HSV',hsv_frame)
+cv2.imshow('GREY SCALE',grey_frame)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+Para obtener todos los flags de OpenCV, ejecuta el siguiente _script_:
+```python3
+import cv2
+flags = [i for i in dir(cv2) if i.startswith('COLOR_')]
+print flags
+```
+### Seguimiento de objetos
+Una técnica para hacer seguimiento de objetos muy utilizada es seguir el color del objeto, los cual es bastante facíl ahora que podemos trabajar la imagen es **_HSV_**. Para esto, capturamos cada cuadro, lo convertimos a _HSV_, aplicamos un filtro, y luego podemos hacer lo que uieramos con esa imagen.
+```python3
+import numpy as np
+import cv2
+
+nCam = 0
+cap = cv2.VideoCapture(nCam) 
+
+if cap.isOpened():
+	cap.open(nCam)	
+	
+cv2.namedWindow('frame1')
+cv2.moveWindow('frame1', 30, 100)
+
+cv2.namedWindow('frame2')
+cv2.moveWindow('frame2', 700, 100)
+
+cv2.namedWindow('frame3')
+cv2.moveWindow('frame3', 365, 150)
+
+lower_color = np.array([155,80,80]) #
+upper_color = np.array([175,255,255]) #
+
+while(True):
+	ret, frame = cap.read()
+	
+	# Convertimos la imagen de BGR a HSV
+	hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV) 
+	
+	# Creamos una mascara que deja en BLANCO los pixeles en ese rango, y en NEGRO lo demas.
+	mask_color = cv2.inRange(hsv_frame, lower_color, upper_color) 
+	
+	# Unimos la máscara y la imagen original
+	hsv_frame_mask = cv2.bitwise_and(frame,frame, mask= mask_color) 
+	
+	cv2.imshow('frame1',frame)
+	cv2.imshow('frame2',hsv_frame_mask)
+	cv2.imshow('frame3',mask_color)
+	
+	if cv2.waitKey(1) & 0xFF == 27:
+		break
+
+
+cap.release()
+cv2.destroyAllWindows()	
+```
+### Thresholding
+
 
