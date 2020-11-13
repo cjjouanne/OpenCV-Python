@@ -34,8 +34,6 @@ En el archivo `channels.py` se separan los canales de la imagen, y se muestra el
 
 ![](https://github.com/cjjouanne/OpenCV-Python/blob/main/Ejemplos/06_OperacionesBasicas/channelR.jpg)
 
-Despues, se midifica la imagen, y al canal **R** se le asigna el valor `0` mostrando esta imagen.
+Despues, se modifica la imagen, y al canal **R** se le asigna el valor `0` mostrando esta imagen, la cual contiene solo los canales **B** y **G**
 
 ![](https://github.com/cjjouanne/OpenCV-Python/blob/main/Ejemplos/06_OperacionesBasicas/channelsBG.jpg)
-
-La cual contiene solo los canales **B** y **G**
