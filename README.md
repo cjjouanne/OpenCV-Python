@@ -582,7 +582,7 @@ plt.show()
 
 Al trabajar en ambientes de poca luz, o con cámaras de mala calidad, nos encontramos con mucho ruido en las imágenes. OpenCV nos ofrece diferentes maneras de _suavizar_ el ruido, difuminando un poco la imagen.
 ### Convolucion 2D
-Al igual que cuando se trabaja con señales unidimensionales, con las imágenes se pueden utilizar **_filtros de bajo_** y **_filtros de paso alto_** (LPF y HPS por sus siglas en inglés). Un LPF ayuda a eliminar el ruido, y un HPF ayuda a encontrar los bordes. OpenCV ofrece la función `cv2.filter2D()` la cual nos permite convolucionar un _kernel_ con una imagen. En el siguiente ejemplo se utiliza un kernel de filtro de promedio de _5x5_:
+Al igual que cuando se trabaja con señales unidimensionales, con las imágenes se pueden utilizar **_filtros de paso bajo_** y **_filtros de paso alto_** (LPF y HPS por sus siglas en inglés). Un LPF ayuda a eliminar el ruido, y un HPF ayuda a encontrar los bordes. OpenCV ofrece la función `cv2.filter2D()` la cual nos permite convolucionar un _kernel_ con una imagen. En el siguiente ejemplo se utiliza un kernel de filtro de promedio de _5x5_:
 ```python3
 import cv2
 import numpy as np
@@ -598,8 +598,9 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
 ### Difuminado de Imagen
-Hay varios tipos de difuminado de imagen
-#### Difunidación
+Hay varios tipos de difuminado de imagen:
+#### Difuminación
+En este ejemplo se utiliza un kernel de _5x5_
 ```python3
 import cv2
 import numpy as np
