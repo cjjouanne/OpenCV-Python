@@ -1,6 +1,6 @@
 # Procesos sobre Color
 
-El archivo `seguimmientoObjetos.py` permite segmentar el color en el que se hace click, lo cual permite seguir a un objeto de un color particular. Para esto,
+El archivo `seguimientoObjetos.py` permite segmentar el color en el que se hace click, lo cual permite seguir a un objeto de un color particular. Para esto,
 el _script_ utiliza
 
 ```python3
