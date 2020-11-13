@@ -1,6 +1,6 @@
-# Ejemplos
+# Ejemplos en Python 🐍 🔵🟢🔴
 
-Estos ejeplos se encuentran probados en `Python 3.9.0` con `OpenCV 4.4.0`. Además, algunos de los ejemplos necesitan `matplotlib`. En la carpeta de [Recursos]() 
+Estos ejeplos se encuentran probados en `Python 3.9.0` con `OpenCV 4.4.0`. Además, algunos de los ejemplos necesitan `matplotlib`. En la carpeta de [Recursos](https://github.com/cjjouanne/OpenCV-Python/tree/main/Ejemplos/Recursos) 
 se encuentran las imagenes y videos utilizados en los ejemplos. Adentro de cada carpeta se encuentran los archivos de ejemplo de cada tema (Ej: `filtros.py`),
 un **README.md** explicando el contenido, y el resultado obtenido si es que corresponde.
 
