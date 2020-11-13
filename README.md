@@ -1,4 +1,5 @@
 # OpenCV-Python:computer: :eyes:
+> Por [Carlos Jouanne G.](https://github.com/cjjouanne)
 
 Si quieres aprender a usar **OpenCV** con **Python** en español, creo que este es un buen lugar para empezar. Solo necesitas tener conocimientos básicos de 
 Python 3, y tener instalado `Python 3`,`NumPy` y `OpenCV`.
@@ -476,5 +477,39 @@ cap.release()
 cv2.destroyAllWindows()	
 ```
 ### Thresholding
+El **_thresholding_** es un grupo de algoritmos que nos permite separar un conjunto de elementos, y para esto se utiliza el método del umbral. En el caso de las imágenes, donde a los valores de un pixel que están por sobre el umbral se les asigna un nuevo valor (que puede ser Blanco), y a los pixeles cuyos valores se encuentran por debajo del umbral se les asigna un valor diferente (que puede ser negro). Para hacer esto en OpenCV, se utiliza la función `cv2.threshold()`la cual recibe cuatro argumentos, el primero es la imagen (preferiblemente en Escala de Grises), el segundo parámetro corresponde al valor del umbral, el cual debe ser superado, el tercer parámetro es el valor que se le asigna a aquellos pixeles que superan el umbral, y el cuarto es un flag que define el tipo de _threshold_ que se quiere realizar. Algunos tipos son:
+
+* cv2.THRESH_BINARY
+* cv2.THRESH_BINARY_INV
+* cv2.THRESH_TRUNC
+* cv2.THRESH_TOZERO
+* cv2.THRESH_TOZREO_INV
+
+> Puedes ver ejemplos de lo que hace cada tipo de threshold haciendo click [aquí](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_thresholding/py_thresholding.html#simple-thresholding).
+
+Esta función retorna dos valores definidos como **_retval_** y la imagen obtenida del _thresholding_.
+
+```python3
+import cv2
+import numpy as np
+
+img = cv2.imread('image1.png',0)
+
+ret,thresh1 = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
+ret,thresh2 = cv2.threshold(img,127,255,cv2.THRESH_BINARY_INV)
+ret,thresh3 = cv2.threshold(img,127,255,cv2.THRESH_TRUNC)
+ret,thresh4 = cv2.threshold(img,127,255,cv2.THRESH_TOZERO)
+ret,thresh5 = cv2.threshold(img,127,255,cv2.THRESH_TOZERO_INV)
+
+cv2.imshow('BINARY',thr1)
+cv2.imshow('BINARY_INV',thr2)
+cv2.imshow('TRUNC',thr3)
+cv2.imshow('TOZERO',thr4)
+cv2.imshow('TOZERO_INV',thr5)
+
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
 
 
