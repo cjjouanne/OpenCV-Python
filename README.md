@@ -629,7 +629,7 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
 #### Difuminación Gaussiana
-Hay que especificar el alto y ancho del kernel, el cual debe se un entero positivo.
+Hay que especificar el alto y ancho del kernel, el cual debe se un entero impar positivo.
 ```python3
 import cv2
 import numpy as np
@@ -646,7 +646,7 @@ cv2.destroyAllWindows()
 
 #### Filtro Bilateral
 
-Este filtro se caracteriza por su efectividd para eliminar el ruido y conservar los bordes, sin embargo, es considerablemente más lento, y por lo tanto, su uso tiene más limitaciones en comparación a los otros métodos.
+Este filtro se caracteriza por su efectividad para eliminar el ruido y conservar los bordes, sin embargo, es considerablemente más lento, y por lo tanto, su uso tiene más limitaciones en comparación a los otros métodos.
 ```python3
 import cv2
 import numpy as np
