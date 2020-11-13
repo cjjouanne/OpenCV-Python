@@ -1,7 +1,7 @@
 # OpenCV-Python:computer: :eyes:
 > Por [Carlos Jouanne G.](https://github.com/cjjouanne)
 
-Si quieres aprender a usar **OpenCV** con **Python** en español, creo que este es un buen lugar para empezar. Solo necesitas tener conocimientos básicos de 
+Si quieres aprender a usar **OpenCV** con **Python** en español, creo que este es un buen lugar para empezar. Solo necesitas tener conocimientos básicos de
 Python 3, y tener instalado `Python 3`,`NumPy` y `OpenCV`.
 > Ejemplos y contenidos absolutamente basados en [este sitio](https://opencv-python-tutroals.readthedocs.io/en/latest/index.html)
 ## Contenidos
@@ -16,7 +16,7 @@ Python 3, y tener instalado `Python 3`,`NumPy` y `OpenCV`.
   * [Operaciones Básicas](#Operaciones-Básicas)
   * [Operaciones Matemáticas](#Operaciones-Matemáticas)
   * [Procesos sobre Color](#Procesos-sobre-Color)
-  * [Thresholging](#Thresholding)
+  * [Thresholding](#Thresholding)
   * [Eliminación de Ruido](#Eliminacion-de-Ruido)
 
 ## OpenCV
@@ -28,18 +28,18 @@ OpenCV es una librería de visión por computadora, la se inició en Intel el a�
 
 ## Imagenes
 
-Para trabajar con imagenes en OpenCV, vamos a empezar con loc comandos más básicos: `cv2.imread()`,`cv2.imshow()`, y `cv2.imwrite()`. Con estos tres comandos 
+Para trabajar con imagenes en OpenCV, vamos a empezar con loc comandos más básicos: `cv2.imread()`,`cv2.imshow()`, y `cv2.imwrite()`. Con estos tres comandos
 podemos leer imagenes, mostrarlas en pantalla, y guardarlas como archivos.
 
 ### Leer una imagen
-En primer lugar, tenemos la función `cv2.imread()`, la cual recibe dos argumentos, el primero es un string con el nombre de la imagen (ej: `"image.jpg"`) si la 
-imagen se encuentra en el mismo directorio que nuestro archivo de Python, o bien el path hasta la imagen (`"dir/image.jpg"`). El segundo argumento pueden ser 
+En primer lugar, tenemos la función `cv2.imread()`, la cual recibe dos argumentos, el primero es un string con el nombre de la imagen (ej: `"image.jpg"`) si la
+imagen se encuentra en el mismo directorio que nuestro archivo de Python, o bien el path hasta la imagen (`"dir/image.jpg"`). El segundo argumento pueden ser
 alguna de las siguientes opciones:
 * `cv2.IMREAD_COLOR`: Carga la imagen a color (rellenando las transparencias por *defualt*)
 * `cv2.IMREAD_GRAYSCALE`: Carga la imagen en escala de grises
 * `cv2.IMREAD_UNCHANGED`: Carga la imagen como está definida (Incluyendo transaparencias o *canal alpha*)
 
-Aunque estas opciones se pueden reemplazar por `1`,`0` o `-1` respectivamente, pero no es lo recomendable puesto que reduce la legibilidad del código. Entonces, 
+Aunque estas opciones se pueden reemplazar por `1`,`0` o `-1` respectivamente, pero no es lo recomendable puesto que reduce la legibilidad del código. Entonces,
 tenemos que:
 ```python3
 import numpy as np
@@ -49,8 +49,8 @@ import cv2
 img = cv2.image("image.jpg", cv2.IMREAD_GRAYSCALE)
 ```
 ### Mostrar una imagen
-Ahora que ya tenemos la imagen cargada, queremos poder mostrarla en pantalla. Para eso, utilizamos el comando `cv2.imshow()`, el cual tambien recibe dos 
-parámetros. El primero es un string con el nombre de la ventana, y el segundo es la imagen ya cargada con `cv2.imread()`. Siguiendo con el código anterior, nuestro 
+Ahora que ya tenemos la imagen cargada, queremos poder mostrarla en pantalla. Para eso, utilizamos el comando `cv2.imshow()`, el cual tambien recibe dos
+parámetros. El primero es un string con el nombre de la ventana, y el segundo es la imagen ya cargada con `cv2.imread()`. Siguiendo con el código anterior, nuestro
 ejemplo se vería de la siguiente forma:
 ```python3
 # Abre la ventana con la imagen
@@ -58,11 +58,11 @@ cv2.imshow("frame1", img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
-Donde `cv2.waitKey()` espera a que se presione alguna tecla (en esta caso puede ser cualquiera), y `cv2.destroyAllWindows()` cierra todas las ventanas abiertas por 
+Donde `cv2.waitKey()` espera a que se presione alguna tecla (en esta caso puede ser cualquiera), y `cv2.destroyAllWindows()` cierra todas las ventanas abiertas por
 `OpenCV`.(Para destruir una ventana en específico usa el comando `cv2.destroyWindow("windowName")`)
 ### Guardar una imagen
 Suponiendo que queramos guardar la imagen despues de trabajar con ella, podemos utilizar el comando `cv2.imwrite()`, cuyo primer argumento es un `string`
-con el nombre con el cual queremos guardar nuestra imagen, y el segundo es la imagen que queremos guardar, lo cual nos lleva a terminar nuestro ejemplo de la 
+con el nombre con el cual queremos guardar nuestra imagen, y el segundo es la imagen que queremos guardar, lo cual nos lleva a terminar nuestro ejemplo de la
 siguiente forma:
 ```python3
 cv2.imwrite('grayscaleImage.jpg', img)
@@ -87,13 +87,13 @@ cv2.imwrite('grayscaleImage.jpg', img)
 ###### Si quieres leer más sobre esto, haz click [aquí](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_image_display/py_image_display.html)
 
 ## Videos
-OpenCV provee una interfaz muy simple a la hora de trabajar con videos desde Python, por lo que una implementación para capturar tu propio video, o trabajar con un 
+OpenCV provee una interfaz muy simple a la hora de trabajar con videos desde Python, por lo que una implementación para capturar tu propio video, o trabajar con un
 archivo existente, no es muy compleja.
 
 ### Captura de Videos con tu cámara
-Para capturar video desde una cámara, OpenCV provee la clase `cv2.VideoCapture()`, la cual recibe un parámetro único, ques es un `int` que indica a cuál cámara 
-debe conectarse. La cámara por *default* del equipo (si es que tiene una) tiene asignado el número 0, y las siguientes opciones continuan con 1, 2, 3, etc. Los 
-objetos pertenecientes a esta clase tienen el método `read()`, el cual no recibe parámteros, y retorna a lo que nos referiremos como `ret` y `frame`, donde `ret` 
+Para capturar video desde una cámara, OpenCV provee la clase `cv2.VideoCapture()`, la cual recibe un parámetro único, ques es un `int` que indica a cuál cámara
+debe conectarse. La cámara por *default* del equipo (si es que tiene una) tiene asignado el número 0, y las siguientes opciones continuan con 1, 2, 3, etc. Los
+objetos pertenecientes a esta clase tienen el método `read()`, el cual no recibe parámteros, y retorna a lo que nos referiremos como `ret` y `frame`, donde `ret`
 es `True` si la cámara captó algo o `False` si no captó nada, y `frame` es la imagen capturada por la cámara.
 
 Con esto, y lo visto en la [sección anterior](#Imagenes), ya podemos capturar nuestro propio video:
@@ -113,7 +113,7 @@ if cap.isOpened():
 while(True):
 	ret, frame = cap.read()
 	cv2.imshow('frame1',frame)
-	
+
 	if cv2.waitKey(1) & 0xFF == 27:
 		break
 
@@ -122,7 +122,7 @@ cap.release()
 cv2.destroyAllWindows()
 ```
 ### Abre un video de tu librería
-Para abrir un video guardado en la librería, el codigo es bastante similar. Solo debes cambiar el parámetro que recibe `cv2.VideoCature()`, entregando el nombre 
+Para abrir un video guardado en la librería, el codigo es bastante similar. Solo debes cambiar el parámetro que recibe `cv2.VideoCature()`, entregando el nombre
 del archivo, o el path que lleva a este.
 ```python3
 import numpy as np
@@ -139,7 +139,7 @@ if cap.isOpened():
 while(cap.isOpened()):
 	ret, frame = cap.read()
 	cv2.imshow('frame1',frame)
-	
+
 	if cv2.waitKey(1) & 0xFF == 27:
 		break
 
@@ -149,10 +149,10 @@ cv2.destroyAllWindows()
 ```
 ### Guarda los videos
 A difrencia de la captura de imagenes, la implementación de la captura de video puede ser un poco más compleja. En primer lugar, es necesario instanciar un objeto
-`cv2.VideoWriter()` el cual recibe cuatro parámetros. El primero es el nombre del archivo que se creará (ej: `prueba.mp4`). El segundo parámetro corresponde al 
-codec de video en formato `FourCC`(Four Character Code), para lo cual podemos instanciar un objeto de la clase `cv2.VideoWriter_fourcc()` que recibe el FourCC en 
-formato string(Los codecs disponibles varían según la plataforma, ej `*'MJPG'` para .mp4). En tercer parámetro es la cantidad de cuadros por segundo o **fps** por 
-sus siglas en inglés. Luego se agrega el tamaño de los cuadros, y por último, como parametro opcional, esta el flag **isColor** el cual indica si el video es 
+`cv2.VideoWriter()` el cual recibe cuatro parámetros. El primero es el nombre del archivo que se creará (ej: `prueba.mp4`). El segundo parámetro corresponde al
+codec de video en formato `FourCC`(Four Character Code), para lo cual podemos instanciar un objeto de la clase `cv2.VideoWriter_fourcc()` que recibe el FourCC en
+formato string(Los codecs disponibles varían según la plataforma, ej `*'MJPG'` para .mp4). En tercer parámetro es la cantidad de cuadros por segundo o **fps** por
+sus siglas en inglés. Luego se agrega el tamaño de los cuadros, y por último, como parametro opcional, esta el flag **isColor** el cual indica si el video es
 color(`True`) o en escala de grises(`False`). Una implementación del código se vería así:
 ```python3
 import numpy as np
@@ -188,10 +188,10 @@ out.release()
 cv2.destroyAllWindows()
 ```
 ## Funciones de Dibujo
-OpenCv permite añadir en las imágenes o videos, figuras como círculos, rectangulos, lineas, y texto. Para esto, OpenCV provee una serie de funciones muy simples y 
+OpenCv permite añadir en las imágenes o videos, figuras como círculos, rectangulos, lineas, y texto. Para esto, OpenCV provee una serie de funciones muy simples y
 bastante similares entre si.
 ### Lineas
-Para añadir una linea tenemos la función `cv2.line()`, que recibe la imagen sobre la que dibuja, las coordenadas desde donde parte la linea, las cooredenadas donde 
+Para añadir una linea tenemos la función `cv2.line()`, que recibe la imagen sobre la que dibuja, las coordenadas desde donde parte la linea, las cooredenadas donde
 la linea termina, el color de la linea en **BGR** y el grosor de la linea e pixeles.
 ```python3
 import numpy as np
@@ -216,10 +216,10 @@ Para añadir texto, utilizamos `cv2.puText()`, que recibe como parámetros la im
 img = cv2.putText(img, "Example Text", (200, 30),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
 ```
 ### Otros
-Se pueden añadir más figuras como [rectángulos](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_drawing_functions/py_drawing_functions.html#drawing-rectangle), [polígonos](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_drawing_functions/py_drawing_functions.html#drawing-polygon) y [elipses](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_drawing_functions/py_drawing_functions.html#drawing-ellipse) pero las funciones son todas bastante 
+Se pueden añadir más figuras como [rectángulos](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_drawing_functions/py_drawing_functions.html#drawing-rectangle), [polígonos](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_drawing_functions/py_drawing_functions.html#drawing-polygon) y [elipses](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_drawing_functions/py_drawing_functions.html#drawing-ellipse) pero las funciones son todas bastante
 similares, por lo que no vale la pena mencionarlas todas. Si necesitas alguna en específico, puedes consultar la documentación de OpneCV.
 ## Utilizando el Mouse
-En muchos casos podemos necesitar acceder a información donde la manera más simple de hacerlo es con un **click** sobre lo que necesitamos. Para estos casos, OpenCV nos facilita la función `cv2.setMouseCallback()`, la cual recibe dos parámetros. El primero es un string con el nombre de la ventana sobre la cual definiremos el evento, y el segundo corresponde a la función que será llamada al hacer *click*. Se pueden agregar además parámetros extra para entregar más información a la función que se llama, pero por *default* `cv2.setMouseCallback()` entrega a su función un `event` de los cuales puedes aprender más [aquí](https://docs.opencv.org/master/d7/dfc/group__highgui.html#ga927593befdddc7e7013602bca9b079b0), la coordenada `x` del click, la coordenada `y` del click, `flags` y 
+En muchos casos podemos necesitar acceder a información donde la manera más simple de hacerlo es con un **click** sobre lo que necesitamos. Para estos casos, OpenCV nos facilita la función `cv2.setMouseCallback()`, la cual recibe dos parámetros. El primero es un string con el nombre de la ventana sobre la cual definiremos el evento, y el segundo corresponde a la función que será llamada al hacer *click*. Se pueden agregar además parámetros extra para entregar más información a la función que se llama, pero por *default* `cv2.setMouseCallback()` entrega a su función un `event` de los cuales puedes aprender más [aquí](https://docs.opencv.org/master/d7/dfc/group__highgui.html#ga927593befdddc7e7013602bca9b079b0), la coordenada `x` del click, la coordenada `y` del click, `flags` y
 `param`. Una implementación se vería así:
 ```python3
 import cv2
@@ -229,9 +229,9 @@ import numpy as np
 def setPoint(event,x,y,flags,param):
   if event == cv2.EVENT_LBUTTONUP:
     cv2.circle(img, (x, y), 3, (255, 255, 255),-1)
-    
+
 # Crea una imagen negra
-img = np.zeros((h,w,3)).astype(np.uint8) 
+img = np.zeros((h,w,3)).astype(np.uint8)
 
 # Nombramos la ventana y asignamos el setMouseCallback
 cv2.namedWindow('frame1')
@@ -241,7 +241,7 @@ while True:
   cv2.imshow('frame1',img)
   if cv2.waitKey(1) & 0xFF == 27:
     break
-    
+
 # Cerramos todas las ventanas
 cv2.destroyAllWindows()
 ```
@@ -253,7 +253,7 @@ import numpy as np
 
 def on_trackbar(val):
   print val:
-  
+
 # Crea a una imagen negra, y una ventana llamada 'frame'
 img = np.zeros((300,512,3), np.uint8)
 cv2.namedWindow('frame')
@@ -320,7 +320,7 @@ size = img.size
 
 # Con .dtype obtenemos el tipo de datos de la imagen
 dtype = img.dtype
-# >> uint8 
+# >> uint8
 ```
 ### ROI
 Muchas veces vamos a querer modificar una región de la imagen en particular. Esto se usa en algoritmos de reconocimiento, como por ejemplo, para buscar los ojos, primero se buscan las caras, y luego en cada cara se buscan los ojos. Para hacer operaciones en la Región de Interés, o Region Of Interst (ROI), una vez que ya la tenemos identificada, lo hacemos a través del módulo `NumPy`
@@ -438,11 +438,11 @@ import numpy as np
 import cv2
 
 nCam = 0
-cap = cv2.VideoCapture(nCam) 
+cap = cv2.VideoCapture(nCam)
 
 if cap.isOpened():
-	cap.open(nCam)	
-	
+	cap.open(nCam)
+
 cv2.namedWindow('frame1')
 cv2.moveWindow('frame1', 30, 100)
 
@@ -457,26 +457,26 @@ upper_color = np.array([175,255,255]) #
 
 while(True):
 	ret, frame = cap.read()
-	
+
 	# Convertimos la imagen de BGR a HSV
-	hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV) 
-	
+	hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
 	# Creamos una mascara que deja en BLANCO los pixeles en ese rango, y en NEGRO lo demas.
-	mask_color = cv2.inRange(hsv_frame, lower_color, upper_color) 
-	
+	mask_color = cv2.inRange(hsv_frame, lower_color, upper_color)
+
 	# Unimos la máscara y la imagen original
-	hsv_frame_mask = cv2.bitwise_and(frame,frame, mask= mask_color) 
-	
+	hsv_frame_mask = cv2.bitwise_and(frame,frame, mask= mask_color)
+
 	cv2.imshow('frame1',frame)
 	cv2.imshow('frame2',hsv_frame_mask)
 	cv2.imshow('frame3',mask_color)
-	
+
 	if cv2.waitKey(1) & 0xFF == 27:
 		break
 
 
 cap.release()
-cv2.destroyAllWindows()	
+cv2.destroyAllWindows()
 ```
 ## Thresholding
 
@@ -660,4 +660,3 @@ cv2.imshow('frame2',blur)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
-
