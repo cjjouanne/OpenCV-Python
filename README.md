@@ -16,6 +16,8 @@ Python 3, y tener instalado `Python 3`,`NumPy` y `OpenCV`.
   * [Operaciones Básicas](#Operaciones-Básicas)
   * [Operaciones Matemáticas](#Operaciones-Matemáticas)
   * [Procesos sobre Color](#Procesos-sobre-Color)
+  * [Thresholging](#Thresholding)
+  * [Eliminación de Ruido](#Eliminacion-de-Ruido)
 
 ## OpenCV
 OpenCV es una librería de visión por computadora, la se inició en Intel el año 1999 por Gary Bradsky, y su primera versión salió el año 2000. En este momento, OpenCV admite muchos algoritmos relacionados con la visión por computadora y el aprendizaje automático y se está expandiendo día a día. Actualmente, OpenCV admite una amplia variedad de lenguajes de programación como `C++`, `Python`, `Java`, etc. y está disponible en diferentes plataformas, incluidas **Windows**, **Linux**, **OS X**, **Android**, **iOS**, etc. Además, las interfaces basadas en `CUDA` y `OpenCL` también están en desarrollo activo para operaciones de alta velocidad de la GPU.
@@ -476,7 +478,9 @@ while(True):
 cap.release()
 cv2.destroyAllWindows()	
 ```
-### Thresholding
+## Thresholding
+
+### Thresholding Simple
 El **_thresholding_** es un grupo de algoritmos que nos permite separar un conjunto de elementos, y para esto se utiliza el método del umbral. En el caso de las imágenes, donde a los valores de un pixel que están por sobre el umbral se les asigna un nuevo valor (que puede ser Blanco), y a los pixeles cuyos valores se encuentran por debajo del umbral se les asigna un valor diferente (que puede ser negro). Para hacer esto en OpenCV, se utiliza la función `cv2.threshold()`la cual recibe cuatro argumentos, el primero es la imagen (preferiblemente en Escala de Grises), el segundo parámetro corresponde al valor del umbral, el cual debe ser superado, el tercer parámetro es el valor que se le asigna a aquellos pixeles que superan el umbral, y el cuarto es un flag que define el tipo de _threshold_ que se quiere realizar. Algunos tipos son:
 
 * cv2.THRESH_BINARY
@@ -512,4 +516,147 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
 
+### Adaptive Thresholding
+
+La mayoría de las veces un umbral global para toda la imagen no nos dará los resultados que estamos buscando, por lo que existe `cv2.adaptiveThreshold()`. Esta función calcula el _threshold_ en areas más pequeñas de la imagen, lo cual nos da mejores resultados. Puede llevar los parámetros `cv2.ADAPTIVE_THRESH_MEAN_C` o `cv2.ADAPTIVE_THRESH_GAUSSIAN_C` los cuales proporcionan diferentes formas de obtener el _threshold_.
+```python3
+import cv2
+import numpy as np
+
+img = cv2.imread('dave.jpg',0)
+img = cv2.medianBlur(img,5)
+
+ret,thr1 = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
+
+thr2 = cv2.adaptiveThreshold(img,255,cv2.ADAPTIVE_THRESH_MEAN_C,cv2.THRESH_BINARY,11,2)
+thr3 = cv2.adaptiveThreshold(img,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,11,2)
+
+cv2.imshow('BINARY',thr1)
+cv2.imshow('ADAPTIVE_THRESH_MEAN',thr2)
+cv2.imshow('ADAPTIVE_THRESH_GAUSSIAN',thr3)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+> Esta función solo retorna un valor. Para ver más de esto haz click [aqui](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_thresholding/py_thresholding.html#adaptive-thresholding)
+
+### Binarización de Otsu
+Cuando utilizamos un umbral global con `cv2.threshold()` se suele poner un valor arbitrario, y para ver si es bueno, se utiliza el _ensayo y error_, sin embrago, cuando una imagen es **bimodal** (con dos picos en el histograma), se puede tomar como valor del umbral el valor medio entre estos dos picos, y esto es lo que hace el método de Otsu. Para utilizar la Binarización de Otsu en OpenCV, simplemente hay que pasarlo como parámetro extra en `cv2.threshold()`, asignándole `0` al valor del umbral. Si es que no se usa el umbral de Otsu, el parámetro _retval_ corresponde al umbral que se utilizó.
+```python3
+import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+
+# Al usar 0 como segundo parametro se abre en escala de grises
+img = cv2.imread('image1.png',0)
+
+# Global thresholding
+ret1, th1 = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
+
+# Thresholding con Binarización de Otsu
+ret2, th2 = cv2.threshold(img,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+
+# Thresholding con Binarización de Otsu tras filtro Gaussiano.
+blur = cv2.GaussianBlur(img,(5,5),0)
+ret3, th3 = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+
+# Imprime todas las imagenes y sus histogramas
+images = [img, 0, th1,
+          img, 0, th2,
+          blur, 0, th3]
+titles = ['Original Noisy Image','Histogram','Global Thresholding (v=127)',
+          'Original Noisy Image','Histogram',"Otsu's Thresholding",
+          'Gaussian filtered Image','Histogram',"Otsu's Thresholding"]
+
+for i in xrange(3):
+    plt.subplot(3,3,i*3+1),plt.imshow(images[i*3],'gray')
+    plt.title(titles[i*3]), plt.xticks([]), plt.yticks([])
+    plt.subplot(3,3,i*3+2),plt.hist(images[i*3].ravel(),256)
+    plt.title(titles[i*3+1]), plt.xticks([]), plt.yticks([])
+    plt.subplot(3,3,i*3+3),plt.imshow(images[i*3+2],'gray')
+    plt.title(titles[i*3+2]), plt.xticks([]), plt.yticks([])
+plt.show()
+```
+
+## Eliminacion de Ruido
+
+Al trabajar en ambientes de poca luz, o con cámaras de mala calidad, nos encontramos con mucho ruido en las imágenes. OpenCV nos ofrece diferentes maneras de _suavizar_ el ruido, difuminando un poco la imagen.
+### Convolucion 2D
+Al igual que cuando se trabaja con señales unidimensionales, con las imágenes se pueden utilizar **_filtros de bajo_** y **_filtros de paso alto_** (LPF y HPS por sus siglas en inglés). Un LPF ayuda a eliminar el ruido, y un HPF ayuda a encontrar los bordes. OpenCV ofrece la función `cv2.filter2D()` la cual nos permite convolucionar un _kernel_ con una imagen. En el siguiente ejemplo se utiliza un kernel de filtro de promedio de _5x5_:
+```python3
+import cv2
+import numpy as np
+
+img = cv2.imread('image1.png')
+
+kernel = np.ones((5,5),np.float32)/25
+dst = cv2.filter2D(img,-1,kernel)
+
+cv2.imshow('frame1',img)
+cv2.imshow('frame2',dst)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+### Difuminado de Imagen
+Hay varios tipos de difuminado de imagen
+#### Difunidación
+```python3
+import cv2
+import numpy as np
+
+img = cv2.imread('opencv_logo.png')
+
+blur = cv2.blur(img,(5,5))
+
+cv2.imshow('frame1',img)
+cv2.imshow('frame2',blur)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+#### Filtro de Mediana
+```python3
+import cv2
+import numpy as np
+
+img = cv2.imread('opencv_logo.png')
+
+median = cv2.medianBlur(img,5)
+
+cv2.imshow('frame1',img)
+cv2.imshow('frame2',blur)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+#### Difuminación Gaussiana
+Hay que especificar el alto y ancho del kernel, el cual debe se un entero positivo.
+```python3
+import cv2
+import numpy as np
+
+img = cv2.imread('opencv_logo.png')
+
+blur = cv2.GaussianBlur(img,(5,5),0)
+
+cv2.imshow('frame1',img)
+cv2.imshow('frame2',blur)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+
+#### Filtro Bilateral
+
+Este filtro se caracteriza por su efectividd para eliminar el ruido y conservar los bordes, sin embargo, es considerablemente más lento, y por lo tanto, su uso tiene más limitaciones en comparación a los otros métodos.
+```python3
+import cv2
+import numpy as np
+
+img = cv2.imread('opencv_logo.png')
+
+blur = cv2.bilateralFilter(img,9,75,75)
+
+cv2.imshow('frame1',img)
+cv2.imshow('frame2',blur)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
 
