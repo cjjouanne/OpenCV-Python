@@ -46,7 +46,7 @@ import numpy as np
 import cv2
 
 # Lee la imagen en escala de grises
-img = cv2.image("image.jpg", cv2.IMREAD_GRAYSCALE)
+img = cv2.imread("image.jpg", cv2.IMREAD_GRAYSCALE)
 ```
 ### Mostrar una imagen
 Ahora que ya tenemos la imagen cargada, queremos poder mostrarla en pantalla. Para eso, utilizamos el comando `cv2.imshow()`, el cual tambien recibe dos
@@ -74,7 +74,7 @@ import numpy as np
 import cv2
 
 # Lee la imagen en escala de grises
-img = cv2.image("image.jpg", cv2.IMREAD_GRAYSCALE)
+img = cv2.imread("image.jpg", cv2.IMREAD_GRAYSCALE)
 
 # Abre la ventana con la imagen, y la cierra al presionar una tecla
 cv2.imshow("frame1", img)
@@ -147,46 +147,6 @@ while(cap.isOpened()):
 cap.release()
 cv2.destroyAllWindows()
 ```
-### Guarda los videos
-A difrencia de la captura de imagenes, la implementación de la captura de video puede ser un poco más compleja. En primer lugar, es necesario instanciar un objeto
-`cv2.VideoWriter()` el cual recibe cuatro parámetros. El primero es el nombre del archivo que se creará (ej: `prueba.mp4`). El segundo parámetro corresponde al
-codec de video en formato `FourCC`(Four Character Code), para lo cual podemos instanciar un objeto de la clase `cv2.VideoWriter_fourcc()` que recibe el FourCC en
-formato string(Los codecs disponibles varían según la plataforma, ej `*'MJPG'` para .mp4). En tercer parámetro es la cantidad de cuadros por segundo o **fps** por
-sus siglas en inglés. Luego se agrega el tamaño de los cuadros, y por último, como parametro opcional, esta el flag **isColor** el cual indica si el video es
-color(`True`) o en escala de grises(`False`). Una implementación del código se vería así:
-```python3
-import numpy as np
-import cv2
-
-# Instanciamos la camara
-nCam = 0
-cap = cv2.VideoCapture(nCam)
-
-# Verificamos que la camara este inicializada o la inicializamos
-if cap.isOpened():
-	cap.open(nCam)
-
-# Definimos el codec y creamos el VideoWriter
-fourcc = cv2.VideoWriter_fourcc(*'MJPG')
-out = cv2.VideoWriter('newVideo.mp4',fourcc, 20.0, (640,480), True)
-
-while(True):
-    ret, frame = cap.read()
-    if ret==True:
-        # guardamos cada cuadro
-        out.write(frame)
-
-        cv2.imshow('frame',frame)
-        if cv2.waitKey(1) & 0xFF == 27:
-            break
-    else:
-        break
-
-# Terminamos todas las instancias y objetos
-cap.release()
-out.release()
-cv2.destroyAllWindows()
-```
 ## Funciones de Dibujo
 OpenCv permite añadir en las imágenes o videos, figuras como círculos, rectangulos, lineas, y texto. Para esto, OpenCV provee una serie de funciones muy simples y
 bastante similares entre si.
@@ -213,7 +173,8 @@ img = cv2.circle(img, (260,260), 10, (255,0,0),-1)
 Para añadir texto, utilizamos `cv2.puText()`, que recibe como parámetros la imagen a la que se le añade el texto, un `string` con el texto que se quiere añadir, las coordenadas de la esquina superior izquierda del cuadro de texto, la tipografía del texto,la cual puede ser sacada de [aquí](https://docs.opencv.org/3.1.0/d0/de1/group__core.html#ga0f9314ea6e35f99bb23f29567fc16e11), la escala del texto, el color en **BGR**, y el grosor del texto.
 ```python3
 # Añade a la imagen el texto "Example Text" en color blanco
-img = cv2.putText(img, "Example Text", (200, 30),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+img = cv2.putText(img, "Example Text", (200, 30),cv2.FONT_HERSHEY_SIMPLEX, \
+                  0.5, (255, 255, 255), 2)
 ```
 ### Otros
 Se pueden añadir más figuras como [rectángulos](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_drawing_functions/py_drawing_functions.html#drawing-rectangle), [polígonos](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_drawing_functions/py_drawing_functions.html#drawing-polygon) y [elipses](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_drawing_functions/py_drawing_functions.html#drawing-ellipse) pero las funciones son todas bastante
@@ -252,7 +213,7 @@ import cv2
 import numpy as np
 
 def on_trackbar(val):
-  print val:
+  print(val)
 
 # Crea a una imagen negra, y una ventana llamada 'frame'
 img = np.zeros((300,512,3), np.uint8)
@@ -286,7 +247,7 @@ En esta sección no se ven contenidos demasiado relevantes, y yo personalmente j
 Para modificar un pixel en una imagen podemos hacerlo de varias formas. La primera es hacerlos directamente:
 ```python3
 import cv2
-mport numpy as np
+import numpy as np
 
 img = cv2.imread('testImage.jpg')
 
@@ -381,7 +342,7 @@ img1 = cv2.resize(img1, (480, 480))
 img2 = cv2.resize(img2, (480, 480))
 
 # Sumamos las imagenes con peso 0.7 y .0.3
-new_image = cv2.add(img1, 0.7, img2, 0.3, 0)
+new_image = cv2.addWeighted(img1, 0.7, img2, 0.3, 0)
 
 cv2.imshow('new image',new_image)
 cv2.waitKey(0)
