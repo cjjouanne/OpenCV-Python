@@ -1,8 +1,8 @@
 # OpenCV-Python:computer: :eyes:
 > Por [Carlos Jouanne G.](https://github.com/cjjouanne)
 
-Si quieres aprender a usar **OpenCV** con **Python** en español, creo que este es un buen lugar para empezar. Solo necesitas tener conocimientos básicos de
-Python 3, y tener instalado `Python 3`,`NumPy` y `OpenCV`.
+Si quieres aprender a usar **OpenCV** con **Python** en español, creo que este es un buen lugar para empezar con lo **basico**. Solo necesitas tener conocimientos básicos de Python 3, y tener instalado `Python 3`,`NumPy`, `matplotlib` y `OpenCV`. Ante cualquier duda puedes revisar la carpeta de [ejemplos](https://github.com/cjjouanne/OpenCV-Python/tree/main/Ejemplos), la cual contiene diferentes scripts testeados utilizando los contenidos de este artículo.
+
 > Ejemplos y contenidos absolutamente basados en [este sitio](https://opencv-python-tutroals.readthedocs.io/en/latest/index.html)
 ## Contenidos
 * [OpenCV](#OpenCv)
@@ -178,7 +178,7 @@ img = cv2.putText(img, "Example Text", (200, 30),cv2.FONT_HERSHEY_SIMPLEX, \
 ```
 ### Otros
 Se pueden añadir más figuras como [rectángulos](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_drawing_functions/py_drawing_functions.html#drawing-rectangle), [polígonos](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_drawing_functions/py_drawing_functions.html#drawing-polygon) y [elipses](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_drawing_functions/py_drawing_functions.html#drawing-ellipse) pero las funciones son todas bastante
-similares, por lo que no vale la pena mencionarlas todas. Si necesitas alguna en específico, puedes consultar la documentación de OpneCV.
+similares, por lo que no vale la pena mencionarlas todas. Si necesitas alguna en específico, puedes consultar la documentación de OpenCV.
 ## Utilizando el Mouse
 En muchos casos podemos necesitar acceder a información donde la manera más simple de hacerlo es con un **click** sobre lo que necesitamos. Para estos casos, OpenCV nos facilita la función `cv2.setMouseCallback()`, la cual recibe dos parámetros. El primero es un string con el nombre de la ventana sobre la cual definiremos el evento, y el segundo corresponde a la función que será llamada al hacer *click*. Se pueden agregar además parámetros extra para entregar más información a la función que se llama, pero por *default* `cv2.setMouseCallback()` entrega a su función un `event` de los cuales puedes aprender más [aquí](https://docs.opencv.org/master/d7/dfc/group__highgui.html#ga927593befdddc7e7013602bca9b079b0), la coordenada `x` del click, la coordenada `y` del click, `flags` y
 `param`. Una implementación se vería así:
@@ -207,7 +207,7 @@ while True:
 cv2.destroyAllWindows()
 ```
 ## Trackbars
-Una herramienta que nos será de gran utilidad a la hora de manejar parámetros y variables mientras ejecutamos nuestro programa son los **trackbars** ya que OpenCV no cuenta con ningún otro tipo de botón. Para insertar un trackbar en nuestro código, debemos llamar a la funcion `cv2.createTrackbar()` la cual recibe cinco parámetros. El primero es un string con el nombre del trackbar (ej: `'Trackbar1'`), el segundo corresponde al nombre de la ventana en la cual se quieren insertar, el tercero y cuarto corresponden al valor mínimo y máximo respectivamente, y el quinto corresponde a la función que se llamará cada vez que este cambie de valor, función a la cual se le entrega en nuevo valor del trackbar. Además, para obtener el valor de un trackbar, podemos utilizar `cv2.getTrackbarPos()` que recibe el nombre y el nombre de la ventana en la cual se encuentra correspondientes a un trackbar, y retorna su valor actual.
+Una herramienta que nos será de gran utilidad a la hora de manejar parámetros y variables mientras ejecutamos nuestro programa son los **trackbars** ya que OpenCV no cuenta con ningún otro tipo de botón. Para insertar un trackbar en nuestro código, debemos llamar a la funcion `cv2.createTrackbar()` la cual recibe cinco parámetros. El primero es un string con el nombre del trackbar (ej: `'Trackbar1'`), el segundo corresponde al nombre de la ventana en la cual se quieren insertar, el tercero y cuarto corresponden al valor mínimo y máximo respectivamente, y el quinto corresponde a la función que se llamará cada vez que este cambie de valor, función a la cual se le entrega en nuevo valor del trackbar. Además, para obtener el valor de un trackbar, podemos utilizar `cv2.getTrackbarPos()` que recibe el nombre del trackbar y el de la ventana en la cual este se encuentra, y retorna su valor actual.
 ```python3
 import cv2
 import numpy as np
@@ -269,7 +269,7 @@ red = img.item(10,10,2)
 img.itemset((10,10,2),100)
 ```
 ### Acceder a las Propiedades de la Imagen
-Es posible acceder a las propiedades de una imagen através de comandos muy simples, y es posible que queramos usarlos:
+Es posible acceder a las propiedades de una imagen a través de comandos muy simples, y es posible que queramos usarlos:
 ```python3
 # .shape nos retorna la cantidad de filas, columnas, y canales en un arreglo
 shape = img.shape
@@ -360,7 +360,7 @@ cv2.imshow('bitwise and',bitwise_and)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 ```
-El el caso de `cv2.bitwise_not()`, esta operació recibe tres parámetros. El primero corresponde a la imagen sobre la cual se realiza la operación, El segundo parámetro, `dest`, viene con un valor default que no vamos a modificar por ahora. El tercer parámetro `mask` corresponde a la máscara que se aplica en la operación, a la cual le podemos asignaner el valor `None`.
+El el caso de `cv2.bitwise_not()`, esta operación recibe tres parámetros. El primero corresponde a la imagen sobre la cual se realiza la operación, el segundo parámetro, `dest`, viene con un valor default que no vamos a modificar por ahora. El tercer parámetro, `mask`, corresponde a la máscara que se aplica en la operación, a la cual le podemos asignaner el valor `None`.
 ```python3
 img1 = cv2.imread('image1.jpg')
 
@@ -377,7 +377,7 @@ OpenCV nos permite transformar los colores de una imagen **_BGR_** a **_Escala d
 ```python3
 img1 = cv2.imread('image1.jpg')
 
-hsv_frame = cv2.cvtColor(im1, cv2.COLOR_BGR2HSV)
+hsv_frame = cv2.cvtColor(img1, cv2.COLOR_BGR2HSV)
 grey_frame = cv2.cvtColor(img1, cv2.COLOR_BGR2GRAY)
 
 cv2.imshow('HSV',hsv_frame)
@@ -442,7 +442,7 @@ cv2.destroyAllWindows()
 ## Thresholding
 
 ### Thresholding Simple
-El **_thresholding_** es un grupo de algoritmos que nos permite separar un conjunto de elementos, y para esto se utiliza el método del umbral. En el caso de las imágenes, donde a los valores de un pixel que están por sobre el umbral se les asigna un nuevo valor (que puede ser Blanco), y a los pixeles cuyos valores se encuentran por debajo del umbral se les asigna un valor diferente (que puede ser negro). Para hacer esto en OpenCV, se utiliza la función `cv2.threshold()`la cual recibe cuatro argumentos, el primero es la imagen (preferiblemente en Escala de Grises), el segundo parámetro corresponde al valor del umbral, el cual debe ser superado, el tercer parámetro es el valor que se le asigna a aquellos pixeles que superan el umbral, y el cuarto es un flag que define el tipo de _threshold_ que se quiere realizar. Algunos tipos son:
+El **_thresholding_** es un grupo de algoritmos que nos permite separar un conjunto de elementos, y para esto se utiliza el método del umbral. En el caso de las imágenes, donde a los valores de un pixel que están por sobre el umbral se les asigna un nuevo valor (que puede ser Blanco), y a los pixeles cuyos valores se encuentran por debajo del umbral se les asigna un valor diferente (que puede ser negro). Para hacer esto en OpenCV, se utiliza la función `cv2.threshold()` la cual recibe cuatro argumentos, el primero es la imagen (preferiblemente en Escala de Grises), el segundo parámetro corresponde al valor del umbral, el cual debe ser superado, el tercer parámetro es el valor que se le asigna a aquellos pixeles que superan el umbral, y el cuarto es un flag que define el tipo de _threshold_ que se quiere realizar. Algunos tipos son:
 
 * cv2.THRESH_BINARY
 * cv2.THRESH_BINARY_INV
@@ -450,7 +450,7 @@ El **_thresholding_** es un grupo de algoritmos que nos permite separar un conju
 * cv2.THRESH_TOZERO
 * cv2.THRESH_TOZREO_INV
 
-> Puedes ver ejemplos de lo que hace cada tipo de threshold haciendo click [aquí](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_imgproc/py_thresholding/py_thresholding.html#simple-thresholding).
+> Puedes ver ejemplos de lo que hace cada tipo de threshold haciendo click [aquí](https://github.com/cjjouanne/OpenCV-Python/tree/main/Ejemplos/09_Thresholding).
 
 Esta función retorna dos valores definidos como **_retval_** y la imagen obtenida del _thresholding_.
 
@@ -460,11 +460,11 @@ import numpy as np
 
 img = cv2.imread('image1.png',0)
 
-ret,thresh1 = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
-ret,thresh2 = cv2.threshold(img,127,255,cv2.THRESH_BINARY_INV)
-ret,thresh3 = cv2.threshold(img,127,255,cv2.THRESH_TRUNC)
-ret,thresh4 = cv2.threshold(img,127,255,cv2.THRESH_TOZERO)
-ret,thresh5 = cv2.threshold(img,127,255,cv2.THRESH_TOZERO_INV)
+ret,thr1 = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
+ret,thr2 = cv2.threshold(img,127,255,cv2.THRESH_BINARY_INV)
+ret,thr3 = cv2.threshold(img,127,255,cv2.THRESH_TRUNC)
+ret,thr4 = cv2.threshold(img,127,255,cv2.THRESH_TOZERO)
+ret,thr5 = cv2.threshold(img,127,255,cv2.THRESH_TOZERO_INV)
 
 cv2.imshow('BINARY',thr1)
 cv2.imshow('BINARY_INV',thr2)
@@ -484,7 +484,7 @@ La mayoría de las veces un umbral global para toda la imagen no nos dará los r
 import cv2
 import numpy as np
 
-img = cv2.imread('dave.jpg',0)
+img = cv2.imread('image1.jpg',0)
 img = cv2.medianBlur(img,5)
 
 ret,thr1 = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
@@ -512,24 +512,24 @@ from matplotlib import pyplot as plt
 img = cv2.imread('image1.png',0)
 
 # Global thresholding
-ret1, th1 = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
+ret1, thr1 = cv2.threshold(img,127,255,cv2.THRESH_BINARY)
 
 # Thresholding con Binarización de Otsu
-ret2, th2 = cv2.threshold(img,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+ret2, thr2 = cv2.threshold(img,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
 
 # Thresholding con Binarización de Otsu tras filtro Gaussiano.
 blur = cv2.GaussianBlur(img,(5,5),0)
-ret3, th3 = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
+ret3, thr3 = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
 
 # Imprime todas las imagenes y sus histogramas
-images = [img, 0, th1,
-          img, 0, th2,
-          blur, 0, th3]
+images = [img, 0, thr1,
+          img, 0, thr2,
+          blur, 0, thr3]
 titles = ['Original Noisy Image','Histogram','Global Thresholding (v=127)',
           'Original Noisy Image','Histogram',"Otsu's Thresholding",
           'Gaussian filtered Image','Histogram',"Otsu's Thresholding"]
 
-for i in xrange(3):
+for i in range(0, 3):
     plt.subplot(3,3,i*3+1),plt.imshow(images[i*3],'gray')
     plt.title(titles[i*3]), plt.xticks([]), plt.yticks([])
     plt.subplot(3,3,i*3+2),plt.hist(images[i*3].ravel(),256)
@@ -566,7 +566,7 @@ En este ejemplo se utiliza un kernel de _5x5_
 import cv2
 import numpy as np
 
-img = cv2.imread('opencv_logo.png')
+img = cv2.imread('image1.png')
 
 blur = cv2.blur(img,(5,5))
 
@@ -580,7 +580,7 @@ cv2.destroyAllWindows()
 import cv2
 import numpy as np
 
-img = cv2.imread('opencv_logo.png')
+img = cv2.imread('image1.png')
 
 median = cv2.medianBlur(img,5)
 
@@ -595,7 +595,7 @@ Hay que especificar el alto y ancho del kernel, el cual debe se un entero impar 
 import cv2
 import numpy as np
 
-img = cv2.imread('opencv_logo.png')
+img = cv2.imread('image1.png')
 
 blur = cv2.GaussianBlur(img,(5,5),0)
 
@@ -612,7 +612,7 @@ Este filtro se caracteriza por su efectividad para eliminar el ruido y conservar
 import cv2
 import numpy as np
 
-img = cv2.imread('opencv_logo.png')
+img = cv2.imread('image1.png')
 
 blur = cv2.bilateralFilter(img,9,75,75)
 
