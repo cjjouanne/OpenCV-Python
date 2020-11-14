@@ -20,9 +20,8 @@ Si quieres aprender a usar **OpenCV** con **Python** en español, creo que este 
   * [Eliminación de Ruido](#Eliminacion-de-Ruido)
 
 ## OpenCV
-OpenCV es una librería de visión por computadora, la se inició en Intel el año 1999 por Gary Bradsky, y su primera versión salió el año 2000. En este momento, OpenCV admite muchos algoritmos relacionados con la visión por computadora y el aprendizaje automático y se está expandiendo día a día. Actualmente, OpenCV admite una amplia variedad de lenguajes de programación como `C++`, `Python`, `Java`, etc. y está disponible en diferentes plataformas, incluidas **Windows**, **Linux**, **OS X**, **Android**, **iOS**, etc. Además, las interfaces basadas en `CUDA` y `OpenCL` también están en desarrollo activo para operaciones de alta velocidad de la GPU.
-
-**OpenCV-Python** es la API de Python de OpenCV. Combina las mejores cualidades de la API `OpenCV C++` y el lenguaje `Python`.
+OpenCV es una librería de visión por computadora, la se inició en Intel el año 1999 por Gary Bradsky, y su primera versión salió el año 2000. En este momento, OpenCV admite muchos algoritmos relacionados con la visión por computadora y el aprendizaje automático, y se está expandiendo día a día. Actualmente, OpenCV admite una amplia variedad de lenguajes de programación como `C++`, `Python`, `Java`, etc. y está disponible en diferentes plataformas, incluidas **Windows**, **Linux**, **OS X**, **Android**, **iOS**, etc.
+**OpenCV-Python** es la API de Python de OpenCV. Combina las mejores cualidades de `OpenCV C++` y el lenguaje `Python`.
 
 ### Empezemos
 
@@ -84,7 +83,7 @@ cv2.destroyAllWindows()
 # Guarda la imagen en escala de grises
 cv2.imwrite('grayscaleImage.jpg', img)
 ```
-###### Si quieres leer más sobre esto, haz click [aquí](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_image_display/py_image_display.html)
+> Si quieres leer más sobre esto, haz click [aquí](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_image_display/py_image_display.html)
 
 ## Videos
 OpenCV provee una interfaz muy simple a la hora de trabajar con videos desde Python, por lo que una implementación para capturar tu propio video, o trabajar con un
@@ -390,7 +389,7 @@ Para obtener todos los flags de OpenCV, ejecuta el siguiente _script_:
 ```python3
 import cv2
 flags = [i for i in dir(cv2) if i.startswith('COLOR_')]
-print flags
+print(flags)
 ```
 ### Seguimiento de objetos
 Una técnica para hacer seguimiento de objetos muy utilizada es seguir el color del objeto, los cual es bastante facíl ahora que podemos trabajar la imagen es **_HSV_**. Para esto, capturamos cada cuadro, lo convertimos a _HSV_, aplicamos un filtro, y luego podemos hacer lo que uieramos con esa imagen.
