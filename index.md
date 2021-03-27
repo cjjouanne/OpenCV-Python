@@ -1,9 +1,3 @@
-## Welcome to GitHub Pages
-
-You can use the [editor on GitHub](https://github.com/cjjouanne/OpenCV-Python/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-# OpenCV-Python:computer: :eyes:
 > Por [Carlos Jouanne G.](https://github.com/cjjouanne)
 
 Si quieres aprender a usar **OpenCV** con **Python** en español, creo que este es un buen lugar para empezar con lo **basico**. Solo necesitas tener conocimientos básicos de Python 3, y tener instalado `Python 3`,`NumPy`, `matplotlib` y `OpenCV`. Ante cualquier duda puedes revisar la carpeta de [ejemplos](https://github.com/cjjouanne/OpenCV-Python/tree/main/Ejemplos), la cual contiene diferentes scripts testeados utilizando los contenidos de este artículo.
